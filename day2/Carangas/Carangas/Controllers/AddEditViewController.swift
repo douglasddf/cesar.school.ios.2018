@@ -8,12 +8,6 @@
 
 import UIKit
 
-enum CarOperationAction {
-    case add_car
-    case edit_car
-    case get_brands
-}
-
 class AddEditViewController: UIViewController {
 
     // MARK: - IBOutlets
@@ -23,11 +17,11 @@ class AddEditViewController: UIViewController {
     @IBOutlet weak var scGasType: UISegmentedControl!
     @IBOutlet weak var btAddEdit: UIButton!
     @IBOutlet weak var loading: UIActivityIndicatorView!
-
-    var brands: [Brand]!
     
+
     // MARK: - Properties
     var car: Car!
+    var brands: [Brand] = []
     
     lazy var pickerView: UIPickerView = {
         let picker = UIPickerView()
@@ -38,22 +32,34 @@ class AddEditViewController: UIViewController {
         return picker
     } ()
     
+    
+    enum CarOperationAction {
+        case add_car
+        case edit_car
+        case get_brands
+    }
+
+    
     // MARK: - Super Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 1 - modo edicao
         if car != nil {
-            
+            // modo edicao
             tfBrand.text = car.brand
             tfName.text = car.name
             tfPrice.text = "\(car.price)"
             scGasType.selectedSegmentIndex = car.gasType
             btAddEdit.setTitle("Alterar carro", for: .normal)
+            
+            
+            // tip. alem do console pegamos o indice atual para setar o picker view
+//            if let brand = car.brand ,let index = brands.index(of: brand) {
+//                pickerView.selectRow(index, inComponent: 0, animated: false)
+//            }
+            
         }
         
-        
-        // 1
         let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 44))
         toolbar.tintColor = UIColor(named: "main")
         let btCancel = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
@@ -67,13 +73,15 @@ class AddEditViewController: UIViewController {
         loadBrands()
     }
     
-    
-    
     // MARK: - IBActions
+
+    
+
+    
     @IBAction func addEdit(_ sender: UIButton) {
         
         if car == nil {
-            // adicionar carro novo
+            // adicionar um novo Car
             car = Car()
         }
         
@@ -84,26 +92,66 @@ class AddEditViewController: UIViewController {
         }
         car.price = Double(tfPrice.text!)!
         car.gasType = scGasType.selectedSegmentIndex
-        
-        // 1 - diferenciar se estamos salvando (SAVE) ou editando (UPDATE_
+     
         if car._id == nil {
             // new car
-            REST.save(car: car) { (success) in
-                self.goBack()
-            }
+            saveCar()
         } else {
-            // 2 - edit current car
-            REST.update(car: car) { (success) in
-                self.goBack()
-            }
+            // edit current car
+            editCar()
         }
-        
         
     }
     
+    // MARK: - Methods
+    
     func goBack() {
+        
         DispatchQueue.main.async {
             self.navigationController?.popViewController(animated: true)
+        }
+        
+    }
+    
+    func saveCar() {
+        startLoadingAnimation()
+        REST.save(car: car) { (success) in
+            if success {
+                self.goBack()
+            } else {
+                self.showAlert(withTitle: "Salvar", withMessage: "Ocorreu algum problema ao tentar Salvar. :(", isTryAgain: true, operation: .add_car)
+            }
+        }
+    }
+    
+    func editCar() {
+        startLoadingAnimation()
+        REST.update(car: car) { (success) in
+            if success {
+                self.goBack()
+            } else {
+                self.showAlert(withTitle: "Editar", withMessage: "Ocorreu algum problema ao tentar Editar. :(", isTryAgain: true, operation: .edit_car)
+            }
+        }
+    }
+
+    // MARK: - Methods
+    
+    func loadBrands() {
+        
+        REST.loadBrands { (brands) in
+            guard let brands = brands else {
+                self.showAlert(withTitle: "Marcas", withMessage: "Ocorreu algum problema no servidor ao tentar recuperar as marcas dos carros. :(", isTryAgain: true, operation: .get_brands)
+                return
+            }
+            
+            // ascending order
+            self.brands = brands.sorted(by: {$0.fipe_name < $1.fipe_name})
+            
+            DispatchQueue.main.async {
+                self.pickerView.reloadAllComponents()
+            }
+                
         }
     }
     
@@ -114,21 +162,6 @@ class AddEditViewController: UIViewController {
     @objc func done() {
         tfBrand.text = brands[pickerView.selectedRow(inComponent: 0)].fipe_name
         cancel()
-    }
-    
-    func loadBrands() {
-        
-        REST.loadBrands { (brands) in
-            guard let brands = brands else {return}
-            
-            // ascending order
-            self.brands = brands.sorted(by: {$0.fipe_name < $1.fipe_name})
-            
-            DispatchQueue.main.async {
-                self.pickerView.reloadAllComponents()
-            }
-            
-        }
     }
     
     func startLoadingAnimation() {
@@ -145,11 +178,12 @@ class AddEditViewController: UIViewController {
         self.loading.stopAnimating()
     }
     
+    
     func showAlert(withTitle titleMessage: String, withMessage message: String, isTryAgain hasRetry: Bool, operation oper: CarOperationAction) {
         
         if oper != .get_brands {
             DispatchQueue.main.async {
-                // ?
+                self.stopLoadingAnimation()
             }
             
         }
@@ -160,12 +194,12 @@ class AddEditViewController: UIViewController {
             let tryAgainAction = UIAlertAction(title: "Tentar novamente", style: .default, handler: {(action: UIAlertAction) in
                 
                 switch oper {
-                case .add_car: break
-                // ?
-                case .edit_car: break
-                // ?
-                case .get_brands: break
-                    // ?
+                    case .add_car:
+                        self.saveCar()
+                    case .edit_car:
+                        self.editCar()
+                    case .get_brands:
+                        self.loadBrands()
                 }
                 
             })
@@ -181,9 +215,8 @@ class AddEditViewController: UIViewController {
             self.present(alert, animated: true, completion: nil)
         }
     }
-
+    
 }
-
 
 extension AddEditViewController:UIPickerViewDelegate, UIPickerViewDataSource {
     
@@ -206,4 +239,8 @@ extension AddEditViewController:UIPickerViewDelegate, UIPickerViewDataSource {
         return brands.count
     }
 }
+
+
+
+
 

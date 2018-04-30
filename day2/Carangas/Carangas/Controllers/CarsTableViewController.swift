@@ -10,54 +10,37 @@ import UIKit
 
 class CarsTableViewController: UITableViewController {
 
+    
     var cars: [Car] = []
+    var label: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.textColor = UIColor(named: "main")
+        return label
+    }()
     
     override func viewDidLoad() {
+        label.text = "Carregando carros..."
         super.viewDidLoad()
+        
+        refreshControl = UIRefreshControl()
+        refreshControl?.addTarget(self, action: #selector(loadData), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        REST.loadCars(onComplete: { (cars) in
-            
-            self.cars = cars
-            
-            // precisa recarregar a tableview usando a main UI thread 
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-            
-        }) { (error) in
-            
-            var response: String = ""
-            
-            switch error {
-            case .invalidJSON:
-                response = "invalidJSON"
-            case .noData:
-                response = "noData"
-            case .noResponse:
-                response = "noResponse"
-            case .url:
-                response = "JSON inválido"
-            case .taskError(let error):
-                response = "\(error.localizedDescription)"
-            case .responseStatusCode(let code):
-                if code != 200 {
-                    response = "Algum problema com o servidor. :( \nError:\(code)"
-                }
-            }
-            
-            print(response)
-            
-        }
+        super.viewWillAppear(animated)        
+        loadData()
     }
-
-
+    
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+        // atribui nossa label para mostrar se tem ou nao dados
+        tableView.backgroundView = cars.count == 0 ? label : nil
         
         return cars.count
     }
@@ -69,7 +52,7 @@ class CarsTableViewController: UITableViewController {
         // Configure the cell...
         let car = cars[indexPath.row]
         cell.textLabel?.text = car.name
-        cell.detailTextLabel?.text = car.brand
+        cell.detailTextLabel?.text = car.brand        
         
         return cell
     }
@@ -86,11 +69,12 @@ class CarsTableViewController: UITableViewController {
     
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        
         if editingStyle == .delete {
+            
             let car = cars[indexPath.row]
             REST.delete(car: car) { (success) in
-                if success {                    
+                if success {
+                    
                     // ATENCAO nao esquecer disso
                     self.cars.remove(at: indexPath.row)
                     
@@ -100,10 +84,11 @@ class CarsTableViewController: UITableViewController {
                     }
                 }
             }
+            
         }
     }
     
-    
+
     /*
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
@@ -132,6 +117,48 @@ class CarsTableViewController: UITableViewController {
             vc?.car = cars[tableView.indexPathForSelectedRow!.row]
         }
     }
+ 
     
+    @objc func loadData() {
+        REST.loadCars(onComplete: { (cars) in
+            
+            self.cars = cars
+            
+            DispatchQueue.main.async {
+                self.label.text = "Não existem carros cadastrados."
+                self.refreshControl?.endRefreshing()
+                self.tableView.reloadData()
+            }
+            
+            
+        }) { (error) in
+            
+            var response: String = ""
+            
+            switch error {
+            case .invalidJSON:
+                response = "JSON inválido"
+            case .noData:
+                response = "JSON inválido"
+            case .noResponse:
+                response = "JSON inválido"
+            case .url:
+                response = "JSON inválido"
+            case .taskError(let error):
+                response = "\(error.localizedDescription)"
+            case .responseStatusCode(let code):
+                if code != 200 {
+                    response = "Algum problema com o servidor. :( \nError:\(code)"
+                }
+            }
+            
+            DispatchQueue.main.async {
+                self.label.text = response
+                self.tableView.backgroundView = self.label
+                print(response)
+            }
+            
+        }
+    }
 
 }

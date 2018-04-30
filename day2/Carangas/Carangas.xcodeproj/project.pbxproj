@@ -14,8 +14,8 @@
 		A1B18D171F9C1D7E00313110 /* CarsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B18D161F9C1D7E00313110 /* CarsTableViewController.swift */; };
 		A1B18D191F9C1DBA00313110 /* AddEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B18D181F9C1DBA00313110 /* AddEditViewController.swift */; };
 		A1B18D1B1F9C1DCF00313110 /* CarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B18D1A1F9C1DCF00313110 /* CarViewController.swift */; };
-		ED838E182093A93A00E96EF7 /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED838E172093A93A00E96EF7 /* Car.swift */; };
-		ED838E1D2093AAD400E96EF7 /* REST.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED838E1C2093AAD400E96EF7 /* REST.swift */; };
+		DC4ABB8320914648002EFFCF /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4ABB8220914648002EFFCF /* Car.swift */; };
+		DC4ABB862091478F002EFFCF /* REST.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4ABB852091478F002EFFCF /* REST.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,8 +28,8 @@
 		A1B18D161F9C1D7E00313110 /* CarsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsTableViewController.swift; sourceTree = "<group>"; };
 		A1B18D181F9C1DBA00313110 /* AddEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditViewController.swift; sourceTree = "<group>"; };
 		A1B18D1A1F9C1DCF00313110 /* CarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarViewController.swift; sourceTree = "<group>"; };
-		ED838E172093A93A00E96EF7 /* Car.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
-		ED838E1C2093AAD400E96EF7 /* REST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REST.swift; sourceTree = "<group>"; };
+		DC4ABB8220914648002EFFCF /* Car.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
+		DC4ABB852091478F002EFFCF /* REST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REST.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,41 +63,41 @@
 			isa = PBXGroup;
 			children = (
 				A1B18D041F9C1BDD00313110 /* AppDelegate.swift */,
-				ED838E192093AA3200E96EF7 /* Models */,
-				ED838E1B2093AA7C00E96EF7 /* Views */,
-				ED838E1A2093AA6A00E96EF7 /* Controllers */,
+				DC4ABB8420914650002EFFCF /* Models */,
+				DC4ABB802091385D002EFFCF /* Views */,
+				DC4ABB812091386A002EFFCF /* Controllers */,
 				A1B18D0B1F9C1BDD00313110 /* Assets.xcassets */,
 				A1B18D101F9C1BDD00313110 /* Info.plist */,
 			);
 			path = Carangas;
 			sourceTree = "<group>";
 		};
-		ED838E192093AA3200E96EF7 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				ED838E172093A93A00E96EF7 /* Car.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		ED838E1A2093AA6A00E96EF7 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				A1B18D161F9C1D7E00313110 /* CarsTableViewController.swift */,
-				A1B18D181F9C1DBA00313110 /* AddEditViewController.swift */,
-				A1B18D1A1F9C1DCF00313110 /* CarViewController.swift */,
-				ED838E1C2093AAD400E96EF7 /* REST.swift */,
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
-		ED838E1B2093AA7C00E96EF7 /* Views */ = {
+		DC4ABB802091385D002EFFCF /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				A1B18D081F9C1BDD00313110 /* Main.storyboard */,
 				A1B18D0D1F9C1BDD00313110 /* LaunchScreen.storyboard */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		DC4ABB812091386A002EFFCF /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A1B18D161F9C1D7E00313110 /* CarsTableViewController.swift */,
+				A1B18D181F9C1DBA00313110 /* AddEditViewController.swift */,
+				A1B18D1A1F9C1DCF00313110 /* CarViewController.swift */,
+				DC4ABB852091478F002EFFCF /* REST.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		DC4ABB8420914650002EFFCF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				DC4ABB8220914648002EFFCF /* Car.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,12 +127,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Eric Brito";
 				TargetAttributes = {
 					A1B18D001F9C1BDD00313110 = {
 						CreatedOnToolsVersion = 9.0.1;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -173,9 +173,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1B18D171F9C1D7E00313110 /* CarsTableViewController.swift in Sources */,
-				ED838E1D2093AAD400E96EF7 /* REST.swift in Sources */,
+				DC4ABB862091478F002EFFCF /* REST.swift in Sources */,
 				A1B18D051F9C1BDD00313110 /* AppDelegate.swift in Sources */,
-				ED838E182093A93A00E96EF7 /* Car.swift in Sources */,
+				DC4ABB8320914648002EFFCF /* Car.swift in Sources */,
 				A1B18D191F9C1DBA00313110 /* AddEditViewController.swift in Sources */,
 				A1B18D1B1F9C1DCF00313110 /* CarViewController.swift in Sources */,
 			);
@@ -217,6 +217,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -224,6 +225,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -251,7 +253,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -274,6 +276,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -281,6 +284,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -302,7 +306,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -314,14 +318,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Carangas/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ericbrito.Carangas;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.github.douglasddf.ios-learning-examples.Carangas";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -331,14 +333,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Carangas/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ericbrito.Carangas;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.github.douglasddf.ios-learning-examples.Carangas";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

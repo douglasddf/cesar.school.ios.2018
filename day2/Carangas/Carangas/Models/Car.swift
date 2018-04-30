@@ -2,7 +2,7 @@
 //  Car.swift
 //  Carangas
 //
-//  Created by Douglas Frari on 27/04/18.
+//  Created by Douglas Frari on 25/04/2018.
 //  Copyright © 2018 Eric Brito. All rights reserved.
 //
 
@@ -18,12 +18,13 @@ class Car: Codable {
     
     var gas: String {
         switch gasType {
-        case 0:
-            return "Flex"
-        case 1:
-            return "Álcool"        
-        default:
-            return "Gasolina"
+            case 0:
+                return "Flex"
+            case 1:
+                return "Álcool"
+            
+            default:
+                return "Gasolina"
         }
     }
 }
@@ -31,8 +32,3 @@ class Car: Codable {
 struct Brand: Codable {
     let fipe_name: String
 }
-
-
-
-
-
