@@ -10,6 +10,9 @@ import UIKit
 
 class WinnersTableViewController: UITableViewController {
 
+    
+    @IBOutlet weak var headerView: UIView!
+    
     var worldCups: [WorldCup] = []
     
     override func viewDidLoad() {
@@ -27,6 +30,17 @@ class WinnersTableViewController: UITableViewController {
             print(error.localizedDescription)
         }
     }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        
+        if UIDevice.current.orientation.isLandscape {
+            print("Landscape")
+            headerView.frame.size.height = 0
+        } else {
+            print("Portrait")
+            headerView.frame.size.height = 138            
+        }
+    }
 
     // MARK: - Table view data source
 
@@ -39,18 +53,12 @@ class WinnersTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! WorldCupTableViewCell
 
-        // pega o atual campeao
+        // get the worldCup of current row 
         let worldCup = worldCups[indexPath.row]
         
         // Configure the cell...
-        
-        // Configure the cell...
-//        cell.textLabel?.text = "Copa \(worldCup.year) - \(worldCup.country)"
-//        cell.detailTextLabel?.text = "\(worldCup.winner) \(worldCup.winnerScore) x \(worldCup.viceScore) \(worldCup.vice)"
-//        cell.imageView?.image = UIImage(named: worldCup.winner)
         cell.prepare(with: worldCup)
         
-
         return cell
     }
     
@@ -90,14 +98,16 @@ class WinnersTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+                
+        let vc = segue.destination as! WorldCupViewController
+        let worldCup = worldCups[tableView.indexPathForSelectedRow!.row]
+        vc.worldCup = worldCup
     }
-    */
+    
 
 }

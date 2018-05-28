@@ -16,6 +16,7 @@
 		ED63A58820B6DCFB005474D4 /* WinnersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED63A58720B6DCFB005474D4 /* WinnersTableViewController.swift */; };
 		ED63A58B20B6DD41005474D4 /* WorldCupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED63A58A20B6DD41005474D4 /* WorldCupViewController.swift */; };
 		ED63A58D20B6DEB9005474D4 /* WorldCup.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED63A58C20B6DEB9005474D4 /* WorldCup.swift */; };
+		EDC1BD9F20B9AAF10073D139 /* GamesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC1BD9E20B9AAF10073D139 /* GamesTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		ED63A58720B6DCFB005474D4 /* WinnersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinnersTableViewController.swift; sourceTree = "<group>"; };
 		ED63A58A20B6DD41005474D4 /* WorldCupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldCupViewController.swift; sourceTree = "<group>"; };
 		ED63A58C20B6DEB9005474D4 /* WorldCup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldCup.swift; sourceTree = "<group>"; };
+		EDC1BD9E20B9AAF10073D139 /* GamesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +49,7 @@
 			isa = PBXGroup;
 			children = (
 				ED097A3720B7339F00EB704F /* WorldCupTableViewCell.swift */,
+				EDC1BD9E20B9AAF10073D139 /* GamesTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -189,6 +192,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED63A58820B6DCFB005474D4 /* WinnersTableViewController.swift in Sources */,
+				EDC1BD9F20B9AAF10073D139 /* GamesTableViewCell.swift in Sources */,
 				ED63A58D20B6DEB9005474D4 /* WorldCup.swift in Sources */,
 				ED097A3820B7339F00EB704F /* WorldCupTableViewCell.swift in Sources */,
 				ED63A57220B6CFE6005474D4 /* AppDelegate.swift in Sources */,
